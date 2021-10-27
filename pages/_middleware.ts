@@ -1,10 +1,8 @@
-import type { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from "next/server"
 
 export function middleware(req: NextRequest) {
-  return new Response(JSON.stringify({ message: 'hello world!' }), {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+  const url = req.url
+  const res = NextResponse.next()
+  res.headers.append("X-Meesage-By-Middleware", "Hello! from " + url)
+  return res
 }
